@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional portfolio of a Software Engineer & AI/ML Student showcasing projects, skills, and experience">
+    <meta name="keywords" content="software engineer, AI, machine learning, web development, portfolio, projects">
+    <meta name="author" content="Adarsh Bhoutekar">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Adarsh Bhoutekar - Software Engineer & AI/ML Student">
+    <meta property="og:description" content="Professional portfolio showcasing innovative projects in AI/ML and web development">
+    <meta property="og:type" content="website">
+    
+    <title>Adarsh Bhoutekar - Software Engineer & AI/ML Portfolio</title>
+    
+    <!-- PWA Manifest -->
+    <!-- <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#16f4d0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Portfolio"> -->
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="enhancements.css">
+    <link rel="stylesheet" href="sections.css">
+    
+    <!-- Chart.js for Skills Visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    
+    <!-- EmailJS for Contact Form -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS (replace with your public key)
+        // Get your key from: https://www.emailjs.com/
+        // emailjs.init("YOUR_PUBLIC_KEY");
+    </script>
+    
+    <!-- Google Analytics (replace with your tracking ID) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        // gtag('config', 'G-XXXXXXXXXX');
+    </script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <!-- <div class="loading-screen" id="loadingScreen">
+        <div class="loader-content">
+            <div class="loader-logo">&lt;Adarsh Bhoutekar /&gt;</div>
+            <div class="loader-bar">
+                <div class="loader-progress" id="loaderProgress"></div>
+            </div>
+            <div class="loader-text">Loading your experience...</div>
+        </div>
+    </div> -->
+    
+    <!-- Particle Background -->
+    <canvas id="particleCanvas" class="particle-canvas"></canvas>
+    
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#home" class="logo">
+                <span class="logo-text">&lt;Adarsh /&gt;</span>
+            </a>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                
+                <div class="color-picker-wrapper">
+                    <button class="color-picker-toggle" id="colorPickerToggle" aria-label="Choose color scheme">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                        </svg>
+                    </button>
+                    <div class="color-palette" id="colorPalette">
+                        <button class="color-option" data-color="cyan" style="background: linear-gradient(135deg, #16f4d0, #7b2cbf);" aria-label="Cyan theme"></button>
+                        <button class="color-option" data-color="purple" style="background: linear-gradient(135deg, #a855f7, #ec4899);" aria-label="Purple theme"></button>
+                        <button class="color-option" data-color="blue" style="background: linear-gradient(135deg, #3b82f6, #06b6d4);" aria-label="Blue theme"></button>
+                        <button class="color-option" data-color="orange" style="background: linear-gradient(135deg, #f59e0b, #ef4444);" aria-label="Orange theme"></button>
+                        <button class="color-option" data-color="green" style="background: linear-gradient(135deg, #10b981, #14b8a6);" aria-label="Green theme"></button>
+                    </div>
+                </div>
+                
+                <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-background">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+        </div>
+        
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="greeting">Hi, I'm</span>
+                    <span class="name">Adarsh Bhoutekar</span>
+                    <span class="title">
+                        <span class="typed-text"></span>
+                        <span class="cursor-blink">|</span>
+                    </span>
+                </h1>
+                <p class="hero-description">
+                    Building innovative solutions at the intersection of artificial intelligence and web development. 
+                    Passionate about creating impactful software that solves real-world problems.
+                </p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="assets/resume.pdf" class="btn btn-secondary" id="resumeBtn" download>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download Resume
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about section" id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <div class="image-wrapper">
+                        <img src="assets/profile.jpg" alt="Profile Picture">
+                        <div class="image-overlay"></div>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h3>Passionate About Innovation & Technology</h3>
+                    <p>
+                        I'm a software engineer and AI/ML enthusiast currently pursuing my studies in Computer Science. 
+                        With a strong foundation in both frontend and backend development, I specialize in building 
+                        scalable web applications and intelligent systems powered by machine learning.
+                    </p>
+                    <p>
+                        My journey in tech has been driven by curiosity and a desire to solve complex problems. 
+                        I've worked on diverse projects ranging from interactive web applications to deep learning models, 
+                        always striving to write clean, efficient, and maintainable code.
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat-card">
+                            <span class="stat-number">3+</span>
+                            <span class="stat-label">Projects Completed</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">100+</span>
+                            <span class="stat-label">Leetcode</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">2027</span>
+                            <span class="stat-label">Expected Graduation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills section" id="skills">
+        <div class="container">
+            <h2 class="section-title">Skills & Expertise</h2>
+            <p class="section-subtitle">Technologies and tools I work with</p>
+            
+            <div class="skills-container">
+                <!-- Frontend -->
+                <div class="skill-category">
+                    <div class="category-header">
+                        <div class="category-icon"><i class="ri-bring-to-front"></i></div>
+                        <h3 class="category-title">Frontend Development</h3>
+                    </div>
+                    <div class="skills-badges">
+                        <div class="skill-badge expert">
+                            <span class="badge-icon"><i class="ri-html5-line"></i></span>
+                            <span class="badge-name">HTML</span>
+                        </div>
+                        <div class="skill-badge expert">
+                            <span class="badge-icon"><i class="ri-css3-line"></i></span>
+                            <span class="badge-name">CSS</span>
+                        </div>
+                        <!-- <div class="skill-badge advanced">
+                            <span class="badge-icon">⚛️</span>
+                            <span class="badge-name">React.js</span>
+                        </div>
+                        <div class="skill-badge advanced">
+                            <span class="badge-icon">💠</span>
+                            <span class="badge-name">Next.js</span>
+                        </div> -->
+                        <!-- <div class="skill-badge advanced">
+                            <span class="badge-icon">🎨</span>
+                            <span class="badge-name">Tailwind CSS</span>
+                        </div>
+                        <div class="skill-badge intermediate">
+                            <span class="badge-icon">🖌️</span>
+                            <span class="badge-name">TypeScript</span>
+                        </div> -->
+                    </div>
+                </div>
+
+                <!-- Backend -->
+                <div class="skill-category">
+                    <div class="category-header">
+                        <div class="category-icon"><i class="ri-settings-2-line"></i></div>
+                        <h3 class="category-title">Backend Development</h3>
+                    </div>
+                    <div class="skills-badges">
+                        <div class="skill-badge expert">
+                            <span class="badge-icon"><i class="ri-python-line"></i></span>
+                            <span class="badge-name">Python</span>
+                        </div>
+                        <!-- <div class="skill-badge advanced">
+                            <span class="badge-icon">🟢</span>
+                            <span class="badge-name">Node.js</span>
+                        </div>
+                        <div class="skill-badge advanced">
+                            <span class="badge-icon">�</span>
+                            <span class="badge-name">Express.js</span>
+                        </div>
+                        <div class="skill-badge advanced">
+                            <span class="badge-icon">🗄️</span>
+                            <span class="badge-name">MongoDB</span>
+                        </div> -->
+                        <!-- <div class="skill-badge advanced">
+                            <span class="badge-icon">�</span>
+                            <span class="badge-name">PostgreSQL</span>
+                        </div> -->
+                    </div>
+                </div>
+
+                <!-- AI/ML -->
+                <div class="skill-category">
+                    <div class="category-header">
+                        <div class="category-icon"><i class="ri-robot-fill"></i></div>
+                        <h3 class="category-title">AI & Machine Learning</h3>
+                    </div>
+                    <div class="skills-badges">
+                        <div class="skill-badge advanced">
+                            <span class="badge-icon"><i class="ri-brain-fill"></i></span>
+                            <span class="badge-name">TensorFlow</span>
+                        </div>
+                        <div class="skill-badge advanced">
+                            <span class="badge-icon"><i class="ri-fire-fill"></i></span>
+                            <span class="badge-name">PyTorch</span>
+                        </div>
+                        <div class="skill-badge expert">
+                            <span class="badge-icon"><i class="ri-goggles-fill"></i></span>
+                            <span class="badge-name">Pandas</span>
+                        </div>
+                        <div class="skill-badge expert">
+                            <span class="badge-icon"><i class="ri-number-1"></i></span>
+                            <span class="badge-name">NumPy</span>
+                        </div>
+                        <div class="skill-badge advanced">
+                            <span class="badge-icon"><i class="ri-brackets-fill"></i></span>
+                            <span class="badge-name">Scikit-learn</span>
+                        </div>
+                        <div class="skill-badge intermediate">
+                            <span class="badge-icon"><i class="ri-brackets-fill"></i></span>
+                            <span class="badge-name">OpenCV</span>
+                        </div>
+                        <div class="skill-badge intermediate">
+                            <span class="badge-icon"><i class="ri-brain-fill"></i></span>
+                            <span class="badge-name">Natural Language Processing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools -->
+                <div class="skill-category">
+                    <div class="category-header">
+                        <div class="category-icon"><i class="ri-tools-line"></i></div>
+                        <h3 class="category-title">Tools & Technologies</h3>
+                    </div>
+                    <div class="skills-badges">
+                        <div class="skill-badge expert">
+                            <span class="badge-icon"><i class="ri-git-merge-line"></i></span>
+                            <span class="badge-name">Git/GitHub</span>
+                        </div>
+                        <div class="skill-badge advanced">
+                            <span class="badge-icon"><i class="ri-docker-fill"></i></span>
+                            <span class="badge-name">Docker</span>
+                        </div>
+                        <!-- <div class="skill-badge intermediate">
+                            <span class="badge-icon">☸️</span>
+                            <span class="badge-name">Kubernetes</span>
+                        </div>
+                        <div class="skill-badge advanced">
+                            <span class="badge-icon"><i class="ri-aws-fill"></i></span>
+                            <span class="badge-name">AWS</span>
+                        </div>
+                        <div class="skill-badge intermediate">
+                            <span class="badge-icon"><i class="ri-git-merge-line"></i></span>
+                            <span class="badge-name">CI/CD</span>
+                        </div> -->
+        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects section" id="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <p class="section-subtitle">Some of my recent work</p>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="assets/project-1.jpg" alt="Movie Recommender System">
+                        <div class="project-overlay">
+                            <button class="btn-icon" onclick="openModal('project1')">View Details</button>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Movie Recommendation System</h3>
+                        <p>Get your movie recommendations based on your interests. Developed using collaborative filtering to suggest personalized movies.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Pandas</span>
+                            <span class="tag">NumPy</span>
+                            <span class="tag">PyCharm</span>
+                            <span class="tag">Scikit-learn</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                                </svg>
+                                GitHub
+                            </a>
+                            <a href="#" class="project-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="assets/project-2.jpg" alt="Personal Portfolio Website">
+                        <div class="project-overlay">
+                            <button class="btn-icon" onclick="openModal('project2')">View Details</button>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Personal Portfolio Website</h3>
+                        <p>A modern, responsive portfolio website showcasing my projects and skills with stunning animations and interactive features.</p>
+                        <div class="project-tags">
+                            <span class="tag">HTML/CSS</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Web Design</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                                </svg>
+                                GitHub
+                            </a>
+                            <a href="#" class="project-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="assets/project-3.jpg" alt="Carbon Footprint Calculator">
+                        <div class="project-overlay">
+                            <button class="btn-icon" onclick="openModal('project3')">View Details</button>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Carbon Footprint Calculator</h3>
+                        <p>A web application that calculates and tracks personal carbon footprint, providing insights and suggestions for reducing environmental impact.</p>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JavaScript</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                                </svg>
+                                GitHub
+                            </a>
+                            <a href="#" class="project-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Experience Section -->
+    <section class="experience section" id="experience">
+        <div class="container">
+            <h2 class="section-title">Experience & Certifications</h2>
+            <p class="section-subtitle">My professional background</p>
+            
+            <!-- Work Experience Grid -->
+            <div class="experience-grid">
+                <div class="experience-item work">
+                    <div class="item-type">Work Experience</div>
+                    <h3>Machine Learning Intern</h3>
+                    <div class="item-meta">
+                        <span class="company">CodeAlpha</span>
+                        <span class="period">2024</span>
+                    </div>
+                    <p>Worked on machine learning projects including regression, classification, clustering, and deep learning implementations.</p>
+                    <div class="tech-stack">
+                        <span>Machine Learning</span>
+                        <span>Python</span>
+                        <span>Deep Learning</span>
+                    </div>
+                </div>
+
+                <div class="experience-item work">
+                    <div class="item-type">Work Experience</div>
+                    <h3>Frontend Developer Intern</h3>
+                    <div class="item-meta">
+                        <span class="company">Cognizfy</span>
+                        <span class="period">2024</span>
+                    </div>
+                    <p>Developed responsive web applications and enhanced user interfaces using modern frontend technologies.</p>
+                    <div class="tech-stack">
+                        <span>React</span>
+                        <span>JavaScript</span>
+                        <span>HTML/CSS</span>
+                    </div>
+                </div>
+
+                <div class="experience-item work">
+                    <h3>Self-Driven Learning</h3>
+                    <div class="item-meta">
+                        <span class="company">Independent Projects</span>
+                        <span class="period">Ongoing</span>
+                    </div>
+                    <p>Completed comprehensive coursework and built projects across data structures, machine learning, deep learning, and database systems.</p>
+                    <div class="tech-stack">
+                        <span>Data Structures & Algorithms</span>
+                        <span>Machine Learning Fundamentals</span>
+                        <span>Deep Learning & Neural Networks</span>
+                        <span>Database Management Systems</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certificates Container -->
+            <div class="certificates-container">
+                <div class="certs-header">
+                    <h3>Certifications</h3>
+                    <p>Professional credentials</p>
+                </div>
+                
+                <div class="cert-carousel">
+                    <button class="carousel-btn prev-btn" aria-label="Previous certificate">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    
+                    <div class="carousel-wrapper">
+                        <div class="carousel-track">
+                            <div class="cert-slide">
+                                <div class="cert-item">
+                                    <h4>DSA in Java</h4>
+                                    <p class="cert-issuer">Apna College</p>
+                                    <span class="cert-date">2025</span>
+                                    <a href="certificates/dsa-java.pdf" target="_blank" rel="noopener noreferrer" class="cert-link">Verify →</a>
+                                </div>
+                            </div>
+                                                
+                            <div class="cert-slide">
+                                <div class="cert-item">
+                                    <h4>Blockchain Basics</h4>
+                                    <p class="cert-issuer">Coursera</p>
+                                    <span class="cert-date">April 2025</span>
+                                    <a href="certificates/Blockchain basics.pdf" target="_blank" rel="noopener noreferrer" class="cert-link">Verify →</a>
+                                </div>
+                            </div>
+                            
+                            <div class="cert-slide">
+                                <div class="cert-item">
+                                    <h4>Database Structures and Management with MySQL</h4>
+                                    <p class="cert-issuer">Meta (Coursera)</p>
+                                    <span class="cert-date">2025</span>
+                                    <a href="certificates/Database Structures and Management with MySQL.pdf" target="_blank" rel="noopener noreferrer" class="cert-link">Verify →</a>
+                                </div>
+                            </div>
+                            
+                            <div class="cert-slide">
+                                <div class="cert-item">
+                                    <h4>Databases and SQL for Data Science with Python</h4>
+                                    <p class="cert-issuer">IBM (Coursera)</p>
+                                    <span class="cert-date">2024</span>
+                                    <a href="certificates/Databases and SQL for Data Science with Python.pdf" target="_blank" rel="noopener noreferrer" class="cert-link">Verify →</a>
+                                </div>
+                            </div>
+                            
+                            <div class="cert-slide">
+                                <div class="cert-item">
+                                    <h4>Introduction to Generative AI</h4>
+                                    <p class="cert-issuer">Google Cloud</p>
+                                    <span class="cert-date">December 2025</span>
+                                    <a href="certificates/Introduction to Generative AI.pdf" target="_blank" rel="noopener noreferrer" class="cert-link">Verify →</a>
+                                </div>
+                            </div>
+                            
+                            <div class="cert-slide">
+                                <div class="cert-item">
+                                    <h4>Python Basics</h4>
+                                    <p class="cert-issuer">Coursera</p>
+                                    <span class="cert-date">Nov 2024</span>
+                                    <a href="certificates/python basics.pdf" target="_blank" rel="noopener noreferrer" class="cert-link">Verify →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="carousel-btn next-btn" aria-label="Next certificate">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="carousel-dots">
+                    <button class="dot active" aria-label="Certificate 1"></button>
+                    <button class="dot" aria-label="Certificate 2"></button>
+                    <button class="dot" aria-label="Certificate 3"></button>
+                    <button class="dot" aria-label="Certificate 4"></button>
+                    <button class="dot" aria-label="Certificate 5"></button>
+                    <button class="dot" aria-label="Certificate 6"></button>
+                    <button class="dot" aria-label="Certificate 7"></button>
+                    <button class="dot" aria-label="Certificate 8"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact section" id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">Let's create something amazing together</p>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Let's Connect</h3>
+                    <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            <div>
+                                <h4>Email</h4>
+                                <a href="mailto:adarshbhoutekar@gmail.com">adarshbhoutekar@gmail.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <div>
+                                <h4>Location</h4>
+                                <p>Nagpur, India</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                            <div>
+                                <h4>GitHub</h4>
+                                <a href="https://github.com/AdarshBhoutekar" target="_blank">@AdarshBhoutekar</a>
+                            </div>
+                        </div>
+
+
+                        <div class="contact-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                            <div>
+                                <h4>LinkedIn</h4>
+                                <a href="https://linkedin.com/in/adarsh-bhoutekar-64b692290" target="_blank">Adarsh Bhoutekar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <form class="contact-form" id="contactForm" action="https://formspree.io/f/xpqdpydz" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                            <span class="error-message" id="nameError"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="_replyto" required>
+                            <span class="error-message" id="emailError"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                        <span class="error-message" id="subjectError"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                        <span class="error-message" id="messageError"></span>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        Send Message
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                    
+                    <div class="form-message" id="formMessage"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>&lt;Adarsh Bhoutekar /&gt;</h3>
+                    <p>Building the future, one line of code at a time.</p>
+                </div>
+                
+                
+                <div class="footer-social">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="https://github.com/AdarshBhoutekar" target="_blank" aria-label="GitHub">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                        <a href="https://linkedin.com/in/adarsh-bhoutekar-64b692290" target="_blank" aria-label="LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                        </a>
+
+
+                        <a href="https://twitter.com/AdarshBhoutekar" target="_blank" aria-label="Twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 AdarshBhoutekar. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script src="features.js"></script>
+    
+    <!-- Register Service Worker for PWA -->
+    <!-- <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('Service Worker registered successfully:', registration.scope);
+                    })
+                    .catch((error) => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script> -->
+</body>
+</html>
