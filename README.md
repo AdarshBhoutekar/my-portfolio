@@ -2,8 +2,6 @@
 
 A modern, responsive portfolio website showcasing my projects, skills, and professional experience as a Software Engineer and AI/ML enthusiast.
 
-![Portfolio Preview](assets/profile.jpg)
-
 ##  Features
 
 - **Responsive Design** - Fully responsive across all devices (mobile, tablet, desktop)
@@ -41,10 +39,9 @@ A modern, responsive portfolio website showcasing my projects, skills, and profe
 ## 📂 Project Structure
 
 ```
-thisIsNewPortafolio/
+portfolio/
 ├── index.html              # Main HTML file
 ├── style.css               # Main stylesheet
-├── sections.css            # Section-specific styles
 ├── enhancements.css        # Additional enhancements
 ├── script.js               # Main JavaScript functionality
 ├── features.js             # Additional features
@@ -76,8 +73,8 @@ thisIsNewPortafolio/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/AdarshBhoutekar/portfolio.git
-   cd thisIsNewPortafolio
+   git clone https://github.com/AdarshBhoutekar/my-portfolio.git
+   cd my-portfolio
    ```
 
 2. **Open in browser**
@@ -149,10 +146,10 @@ This project is open source and available under the [MIT License](LICENSE).
 ##  Author
 
 **Adarsh Bhoutekar**
-- Portfolio: [Live Demo](#)
+- Portfolio: [Live Demo](https://my-portfolio-five-chi-14.vercel.app/)
 - GitHub: [@AdarshBhoutekar](https://github.com/AdarshBhoutekar)
 - LinkedIn: [Adarsh Bhoutekar](https://linkedin.com/in/adarsh-bhoutekar-64b692290)
-- Twitter: [@AdarshBhoutekar](https://twitter.com/AdarshBhoutekar)
+<!-- - Twitter: [@AdarshBhoutekar](https://twitter.com/AdarshBhoutekar) -->
 - Email: adarshbhoutekar@gmail.com
 
 ##  Acknowledgments

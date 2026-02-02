@@ -1,6 +1,5 @@
-// ==========================================
 // LOADING SCREEN
-// ==========================================
+
 const loadingScreen = document.getElementById('loadingScreen');
 const loaderProgress = document.getElementById('loaderProgress');
 
@@ -27,9 +26,8 @@ if (loadingScreen && loaderProgress) {
     }, 200);
 }
 
-// ==========================================
 // TYPING ANIMATION
-// ==========================================
+
 const typedTextSpan = document.querySelector('.typed-text');
 const titles = [
     'Software Engineer',
@@ -75,9 +73,8 @@ setTimeout(() => {
     if (typedTextSpan) type();
 }, 1500);
 
-// ==========================================
 // PARTICLE BACKGROUND
-// ==========================================
+
 const canvas = document.getElementById('particleCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -239,9 +236,9 @@ if (window.innerWidth > 768) {
     });
 }
 
-// ==========================================
+
 // THEME TOGGLE
-// ==========================================
+
 const themeToggle = document.getElementById('themeToggle');
 const html = document.documentElement;
 
@@ -274,7 +271,7 @@ themeToggle.addEventListener('click', () => {
 
 // ==========================================
 // COLOR PICKER
-// ==========================================
+
 const colorPickerToggle = document.getElementById('colorPickerToggle');
 const colorPalette = document.getElementById('colorPalette');
 const colorOptions = document.querySelectorAll('.color-option');
@@ -360,7 +357,7 @@ colorOptions.forEach(option => {
 
 // ==========================================
 // MOBILE NAVIGATION
-// ==========================================
+
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');
 const navLinks = document.querySelectorAll('.nav-link');
@@ -394,7 +391,7 @@ document.addEventListener('click', (e) => {
 
 // ==========================================
 // NAVBAR SCROLL EFFECT
-// ==========================================
+
 const navbar = document.getElementById('navbar');
 
 window.addEventListener('scroll', () => {
@@ -407,7 +404,6 @@ window.addEventListener('scroll', () => {
 
 // ==========================================
 // ACTIVE NAVIGATION LINK
-// ==========================================
 const sections = document.querySelectorAll('.section, .hero');
 
 window.addEventListener('scroll', () => {
@@ -636,8 +632,8 @@ const projectDetails = {
             'Data processing and analysis with Pandas and NumPy'
         ],
         technologies: ['Python', 'Pandas', 'NumPy', 'PyCharm', 'Scikit-learn'],
-        github: '#',
-        demo: '#'
+        github: 'https://github.com/AdarshBhoutekar/movie-recommender-system',
+        demo: 'https://movie-recommender-system-flulzcthmmyscqxk3zzy36.streamlit.app/'
     },
     project2: {
         title: 'Personal Portfolio Website',
@@ -650,8 +646,8 @@ const projectDetails = {
             'Working contact form with email integration'
         ],
         technologies: ['HTML5', 'CSS3', 'JavaScript', 'Formspree', 'Chart.js', 'Intersection Observer'],
-        github: '#',
-        demo: '#'
+        github: 'https://github.com/AdarshBhoutekar/my-portfolio',
+        demo: 'https://my-portfolio-five-chi-14.vercel.app/'
     },
     project3: {
         title: 'Carbon Footprint Calculator',
@@ -664,8 +660,8 @@ const projectDetails = {
             'Track and monitor carbon footprint over time'
         ],
         technologies: ['HTML', 'CSS', 'JavaScript'],
-        github: '#',
-        demo: '#'
+        github: 'https://github.com/AdarshBhoutekar/carbon-footprint-calculator',
+        demo: 'https://adarshbhoutekar.github.io/carbon-footprint-calculator/'
     }
 };
 
