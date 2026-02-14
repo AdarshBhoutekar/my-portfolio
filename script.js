@@ -43,9 +43,8 @@ function type() {
 // Start typing animation
 setTimeout(() => {
     if (typedTextSpan) type();
-}, 500);
+}, 1500);
 
-// ==========================================
 // PARTICLE BACKGROUND
 // ==========================================
 const canvas = document.getElementById('particleCanvas');
@@ -149,16 +148,25 @@ window.addEventListener('resize', () => {
     initParticles();
 });
 
+// Update particle color based on theme
+function updateParticleColor() {
+    const theme = document.documentElement.getAttribute('data-theme');
+    const currentColor = localStorage.getItem('accentColor') || 'cyan';
+    // Particle colors will update automatically through the accent-primary variable
+}
+
 // ==========================================
 // PARTICLE TRAIL CURSOR
 // ==========================================
 if (window.innerWidth > 768) {
     let isHoveringClickable = false;
     let lastParticleTime = 0;
+    const particleInterval = 30; // milliseconds between particles
 
     window.addEventListener('mousemove', (e) => {
         const currentTime = Date.now();
 
+        // Throttle particle creation
         if (currentTime - lastParticleTime < particleInterval) {
             return;
         }
@@ -171,6 +179,7 @@ if (window.innerWidth > 768) {
         const particle = document.createElement('div');
         particle.className = isActive ? 'cursor-particle active' : 'cursor-particle';
 
+        // Random offset for particle spread
         const offsetX = (Math.random() - 0.5) * 20;
         const offsetY = (Math.random() - 0.5) * 20;
 
@@ -181,13 +190,14 @@ if (window.innerWidth > 768) {
 
         document.body.appendChild(particle);
 
+        // Remove particle after animation completes
         setTimeout(() => {
             particle.remove();
         }, 800);
     }
 
     // Track hover state on clickable elements
-    const clickables = document.querySelectorAll('a, button, input, textarea, select, .project-card');
+    const clickables = document.querySelectorAll('a, button, input, textarea, select, .project-card, .skill-card');
     clickables.forEach(el => {
         el.addEventListener('mouseenter', () => {
             isHoveringClickable = true;
@@ -198,15 +208,17 @@ if (window.innerWidth > 768) {
     });
 }
 
-// ==========================================
+
 // THEME TOGGLE
-// ==========================================
+
 const themeToggle = document.getElementById('themeToggle');
 const html = document.documentElement;
 
+// Check for saved theme preference or default to 'dark'
 const currentTheme = localStorage.getItem('theme') || 'dark';
 html.setAttribute('data-theme', currentTheme);
 
+// Theme toggle functionality
 themeToggle.addEventListener('click', () => {
     const theme = html.getAttribute('data-theme');
     const newTheme = theme === 'dark' ? 'light' : 'dark';
@@ -214,11 +226,13 @@ themeToggle.addEventListener('click', () => {
     html.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
 
+    // Add click animation
     themeToggle.style.transform = 'rotate(360deg)';
     setTimeout(() => {
         themeToggle.style.transform = '';
     }, 500);
 
+    // Re-apply current color scheme for new theme
     setTimeout(() => {
         const currentColor = localStorage.getItem('accentColor') || 'cyan';
         if (typeof applyColorScheme === 'function') {
@@ -229,11 +243,12 @@ themeToggle.addEventListener('click', () => {
 
 // ==========================================
 // COLOR PICKER
-// ==========================================
+
 const colorPickerToggle = document.getElementById('colorPickerToggle');
 const colorPalette = document.getElementById('colorPalette');
 const colorOptions = document.querySelectorAll('.color-option');
 
+// Color schemes
 const colorSchemes = {
     cyan: {
         dark: { primary: '#16f4d0', secondary: '#7b2cbf', glow: 'rgba(22, 244, 208, 0.3)' },
@@ -257,44 +272,56 @@ const colorSchemes = {
     }
 };
 
+// Function to apply color scheme
 function applyColorScheme(colorName) {
     const theme = html.getAttribute('data-theme');
     const colors = colorSchemes[colorName][theme];
 
+    // Update CSS variables
     document.documentElement.style.setProperty('--accent-primary', colors.primary);
     document.documentElement.style.setProperty('--accent-secondary', colors.secondary);
     document.documentElement.style.setProperty('--glow', colors.glow);
 }
 
+// Load saved color or default to cyan
 const savedColor = localStorage.getItem('accentColor') || 'cyan';
 applyColorScheme(savedColor);
 
+// Toggle color palette dropdown
 colorPickerToggle.addEventListener('click', (e) => {
     e.stopPropagation();
     colorPalette.classList.toggle('active');
 
+    // Add rotation animation
     colorPickerToggle.style.transform = colorPalette.classList.contains('active')
         ? 'rotate(180deg)'
         : 'rotate(0deg)';
 });
 
+// Color option selection
 colorOptions.forEach(option => {
     option.addEventListener('click', (e) => {
         e.stopPropagation();
         const color = option.getAttribute('data-color');
 
+        // Update active state
         colorOptions.forEach(opt => opt.classList.remove('active'));
         option.classList.add('active');
 
+        // Apply color scheme
         applyColorScheme(color);
+
+        // Save preference
         localStorage.setItem('accentColor', color);
 
+        // Close palette with delay
         setTimeout(() => {
             colorPalette.classList.remove('active');
             colorPickerToggle.style.transform = 'rotate(0deg)';
         }, 300);
     });
 
+    // Set active state for saved color
     if (option.getAttribute('data-color') === savedColor) {
         option.classList.add('active');
     }
@@ -302,7 +329,7 @@ colorOptions.forEach(option => {
 
 // ==========================================
 // MOBILE NAVIGATION
-// ==========================================
+
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');
 const navLinks = document.querySelectorAll('.nav-link');
@@ -312,6 +339,7 @@ hamburger.addEventListener('click', () => {
     navMenu.classList.toggle('active');
 });
 
+// Close menu when clicking on a nav link
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
         hamburger.classList.remove('active');
@@ -319,12 +347,14 @@ navLinks.forEach(link => {
     });
 });
 
+// Close menu when clicking outside and close color palette too
 document.addEventListener('click', (e) => {
     if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
         hamburger.classList.remove('active');
         navMenu.classList.remove('active');
     }
 
+    // Close color palette when clicking outside
     if (colorPalette && !colorPalette.contains(e.target) && e.target !== colorPickerToggle) {
         colorPalette.classList.remove('active');
         if (colorPickerToggle) colorPickerToggle.style.transform = 'rotate(0deg)';
@@ -333,7 +363,7 @@ document.addEventListener('click', (e) => {
 
 // ==========================================
 // NAVBAR SCROLL EFFECT
-// ==========================================
+
 const navbar = document.getElementById('navbar');
 
 window.addEventListener('scroll', () => {
@@ -346,7 +376,6 @@ window.addEventListener('scroll', () => {
 
 // ==========================================
 // ACTIVE NAVIGATION LINK
-// ==========================================
 const sections = document.querySelectorAll('.section, .hero');
 
 window.addEventListener('scroll', () => {
@@ -406,6 +435,7 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
+// Add animation classes to elements and observe them
 // About section
 const aboutImage = document.querySelector('.about-image');
 const aboutText = document.querySelector('.about-text');
@@ -432,6 +462,7 @@ if (imageWrapper) {
     let currentRotateX = 0;
     let currentRotateY = 0;
 
+    // Get bounds on mouse enter to avoid recalculating
     imageWrapper.addEventListener('mouseenter', () => {
         bounds = imageWrapper.getBoundingClientRect();
     });
@@ -439,28 +470,35 @@ if (imageWrapper) {
     imageWrapper.addEventListener('mousemove', (e) => {
         if (!bounds) return;
 
+        // Calculate mouse position relative to element center
         mouseX = e.clientX - bounds.left - bounds.width / 2;
         mouseY = e.clientY - bounds.top - bounds.height / 2;
     });
 
     imageWrapper.addEventListener('mouseleave', () => {
+        // Reset smoothly
         mouseX = 0;
         mouseY = 0;
         bounds = null;
     });
 
+    // Smooth animation loop
     function animate() {
         if (bounds) {
+            // Calculate target rotation (max 20 degrees)
             const targetRotateY = (mouseX / (bounds.width / 2)) * 20;
             const targetRotateX = (mouseY / (bounds.height / 2)) * -20;
 
+            // Smooth easing (lerp)
             currentRotateX += (targetRotateX - currentRotateX) * 0.1;
             currentRotateY += (targetRotateY - currentRotateY) * 0.1;
         } else {
+            // Ease back to 0
             currentRotateX += (0 - currentRotateX) * 0.15;
             currentRotateY += (0 - currentRotateY) * 0.15;
         }
 
+        // Apply transform
         imageWrapper.style.transform = `perspective(1000px) rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg) scale3d(1.05, 1.05, 1.05)`;
 
         requestAnimationFrame(animate);
@@ -469,21 +507,30 @@ if (imageWrapper) {
     animate();
 }
 
-// Skills animation
+
+
+// Skills
 document.querySelectorAll('.skill-category').forEach((category, index) => {
     category.classList.add('fade-in');
     category.style.transitionDelay = `${index * 0.1}s`;
     observer.observe(category);
 });
 
-// Projects animation
+// Projects
 document.querySelectorAll('.project-card').forEach((card, index) => {
     card.classList.add('fade-in');
     card.style.transitionDelay = `${index * 0.1}s`;
     observer.observe(card);
 });
 
-// Contact animation
+// Timeline
+document.querySelectorAll('.timeline-item').forEach((item, index) => {
+    item.classList.add('fade-in');
+    item.style.transitionDelay = `${index * 0.2}s`;
+    observer.observe(item);
+});
+
+// Contact
 const contactInfo = document.querySelector('.contact-info');
 const contactFormElement = document.querySelector('.contact-form');
 
@@ -497,7 +544,7 @@ if (contactFormElement) {
     observer.observe(contactFormElement);
 }
 
-// Check viewport on load
+// Check if elements are already in viewport and make them visible immediately
 setTimeout(() => {
     document.querySelectorAll('.fade-in, .slide-left, .slide-right').forEach(el => {
         const rect = el.getBoundingClientRect();
@@ -515,6 +562,7 @@ setTimeout(() => {
 const modal = document.getElementById('projectModal');
 const modalBody = document.getElementById('modalBody');
 
+// Project details data
 const projectDetails = {
     project1: {
         title: 'Movie Recommendation System',
@@ -540,7 +588,7 @@ const projectDetails = {
             'Dark/Light theme toggle',
             'Working contact form with email integration'
         ],
-        technologies: ['HTML5', 'CSS3', 'JavaScript', 'Formspree'],
+        technologies: ['HTML5', 'CSS3', 'JavaScript', 'Formspree', 'Chart.js', 'Intersection Observer'],
         github: 'https://github.com/AdarshBhoutekar/my-portfolio',
         demo: 'https://my-portfolio-five-chi-14.vercel.app/'
     },
@@ -613,12 +661,14 @@ function closeModal() {
     document.body.style.overflow = '';
 }
 
+// Close modal on background click
 modal.addEventListener('click', (e) => {
     if (e.target === modal) {
         closeModal();
     }
 });
 
+// Close modal with Escape key
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('active')) {
         closeModal();
@@ -631,8 +681,10 @@ document.addEventListener('keydown', (e) => {
 const contactForm = document.getElementById('contactForm');
 const formMessage = document.getElementById('formMessage');
 
+// Email validation regex
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+// Validation functions
 function validateName(name) {
     return name.trim().length >= 2;
 }
@@ -658,6 +710,7 @@ function showError(fieldId, message) {
     inputElement.style.borderColor = '#ff4757';
 }
 
+// Clear error
 function clearError(fieldId) {
     const errorElement = document.getElementById(`${fieldId}Error`);
     const inputElement = document.getElementById(fieldId);
@@ -666,6 +719,7 @@ function clearError(fieldId) {
     inputElement.style.borderColor = 'var(--border-color)';
 }
 
+// Real-time validation
 const nameInput = document.getElementById('name');
 const emailInput = document.getElementById('email');
 const subjectInput = document.getElementById('subject');
@@ -673,7 +727,7 @@ const messageInput = document.getElementById('message');
 
 nameInput.addEventListener('blur', () => {
     if (!validateName(nameInput.value)) {
-        showError('name', 'Name must be at least 2 characters long');
+        showError('name', 'Name must be at least 10 characters long');
     } else {
         clearError('name');
     }
@@ -703,21 +757,25 @@ messageInput.addEventListener('blur', () => {
     }
 });
 
+// Form submission - Now handled by Formspree
 contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Always prevent default to avoid redirect
 
+    // Clear previous messages
     formMessage.className = 'form-message';
     formMessage.textContent = '';
 
+    // Get form values
     const name = nameInput.value;
     const email = emailInput.value;
     const subject = subjectInput.value;
     const message = messageInput.value;
 
+    // Validate all fields
     let isValid = true;
 
     if (!validateName(name)) {
-        showError('name', 'Name must be at least 2 characters long');
+        showError('name', 'Name must be at least 10 characters long');
         isValid = false;
     } else {
         clearError('name');
@@ -744,6 +802,7 @@ contactForm.addEventListener('submit', async (e) => {
         clearError('message');
     }
 
+    // If valid, submit via AJAX
     if (isValid) {
         const submitButton = contactForm.querySelector('button[type="submit"]');
         const originalText = submitButton.innerHTML;
@@ -752,6 +811,7 @@ contactForm.addEventListener('submit', async (e) => {
         submitButton.disabled = true;
 
         try {
+            // Submit to Formspree via fetch
             const response = await fetch(contactForm.action, {
                 method: 'POST',
                 body: new FormData(contactForm),
@@ -761,19 +821,23 @@ contactForm.addEventListener('submit', async (e) => {
             });
 
             if (response.ok) {
+                // Success!
                 formMessage.className = 'form-message success';
                 formMessage.textContent = '✓ Message sent successfully! I\'ll get back to you soon.';
                 contactForm.reset();
 
+                // Hide success message after 5 seconds
                 setTimeout(() => {
                     formMessage.className = 'form-message';
                     formMessage.textContent = '';
                 }, 5000);
             } else {
+                // Error from Formspree
                 formMessage.className = 'form-message error';
                 formMessage.textContent = '✗ Oops! There was a problem. Please try again.';
             }
         } catch (error) {
+            // Network error
             formMessage.className = 'form-message error';
             formMessage.textContent = '✗ Network error. Please check your connection and try again.';
         } finally {
@@ -789,11 +853,13 @@ contactForm.addEventListener('submit', async (e) => {
 const resumeBtn = document.getElementById('resumeBtn');
 
 resumeBtn.addEventListener('click', (e) => {
+    // Add click animation
     resumeBtn.style.transform = 'scale(0.95)';
     setTimeout(() => {
         resumeBtn.style.transform = '';
     }, 150);
 
+    // Track download (optional analytics)
     console.log('Resume downloaded');
 });
 
@@ -818,11 +884,13 @@ backToTop.addEventListener('click', () => {
 });
 
 // ==========================================
-// STAT COUNTER ANIMATION
+// PAGE LOAD ANIMATIONS
 // ==========================================
 window.addEventListener('load', () => {
+    // Add loaded class to body for any load-specific animations
     document.body.classList.add('loaded');
 
+    // Animate stat numbers on about section
     const statNumbers = document.querySelectorAll('.stat-number');
 
     statNumbers.forEach(stat => {
@@ -844,6 +912,7 @@ window.addEventListener('load', () => {
                 }
             };
 
+            // Start animation when element is visible
             const statObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -859,8 +928,9 @@ window.addEventListener('load', () => {
 });
 
 // ==========================================
-// LAZY LOADING IMAGES
+// PERFORMANCE OPTIMIZATION
 // ==========================================
+// Lazy loading images (if needed)
 if ('IntersectionObserver' in window) {
     const imageObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -880,6 +950,99 @@ if ('IntersectionObserver' in window) {
     });
 }
 
+// ==========================================
+// CONSOLE MESSAGE
+// ==========================================
 console.log('%c👋 Hey there!', 'font-size: 20px; font-weight: bold; color: #16f4d0;');
 console.log('%cLooking at the code? I like your style! 🚀', 'font-size: 14px; color: #7b2cbf;');
-console.log('%cCheck out the source: https://github.com/AdarshBhoutekar/my-portfolio', 'font-size: 12px; color: #b0b3c1;');
+console.log('%cCheck out the source: https://github.com/yourusername', 'font-size: 12px; color: #b0b3c1;');
+
+// ==========================================
+// CERTIFICATE CAROUSEL
+// ==========================================
+const initCertificateCarousel = () => {
+    const track = document.querySelector('.carousel-track');
+    const slides = Array.from(document.querySelectorAll('.cert-slide'));
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const dots = Array.from(document.querySelectorAll('.dot'));
+
+    if (!track || slides.length === 0) return;
+
+    let currentIndex = 0;
+    let isTransitioning = false;
+
+    const getSlideWidth = () => track.querySelector('.cert-slide').getBoundingClientRect().width;
+
+    const updateCarousel = () => {
+        slides.forEach((slide, index) => {
+            // Remove all position classes
+            slide.classList.remove('prev', 'active', 'next');
+
+            // Calculate positions (with wrapping)
+            const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+            const nextIndex = (currentIndex + 1) % slides.length;
+
+            // Assign position classes
+            if (index === prevIndex) {
+                slide.classList.add('prev');
+            } else if (index === currentIndex) {
+                slide.classList.add('active');
+            } else if (index === nextIndex) {
+                slide.classList.add('next');
+            }
+        });
+
+        // Update dots
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentIndex);
+        });
+    };
+
+    const goToSlide = (direction) => {
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        currentIndex = (currentIndex + direction + slides.length) % slides.length;
+        updateCarousel();
+
+        setTimeout(() => {
+            isTransitioning = false;
+        }, 600);
+    };
+
+    const goToDot = (dotIndex) => {
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        currentIndex = dotIndex;
+        updateCarousel();
+
+        setTimeout(() => {
+            isTransitioning = false;
+        }, 600);
+    };
+
+    // Arrow button navigation
+    if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(-1));
+    if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(1));
+
+    // Dot navigation
+    dots.forEach((dot, index) => dot.addEventListener('click', () => goToDot(index)));
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') goToSlide(-1);
+        if (e.key === 'ArrowRight') goToSlide(1);
+    });
+
+    // Initialize
+    updateCarousel();
+};
+
+// Initialize carousel when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCertificateCarousel);
+} else {
+    initCertificateCarousel();
+}
